@@ -1,0 +1,109 @@
+@font-face {
+  font-family: 'Monsterrat';
+  src: url('./font/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Monsterrat-Bold';
+  src: url('./font/Montserrat-Bold.ttf');
+}
+
+$displayFlex: flex;
+$centerContent: center;
+$column: column;
+$fullWidth: 100%;
+$fullHeight: 100vh;
+$fontDefault: 'Monsterrat';
+$fontBold: 'Monsterrat-Bold';
+$fontDefaultColor: #707070;
+$specialFontColor: #955151;
+$none: none;
+$fontSubTitle: 2em;
+$titleFontSize: 5em;
+$buttonColor: white;
+$buttonRadius: 25px;
+$pointerCursor: pointer;
+
+.link{
+  text-decoration: none;
+  color: $fontDefaultColor;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: $buttonColor;
+  opacity: 1; /* Firefox */
+}
+
+/*Landing Page css*/
+html, body{
+  height: 100%;
+  font-family: $fontDefault;
+}
+
+.App {
+  text-align: center;
+  height: $fullHeight;
+}
+
+.flex-container{
+  display: $displayFlex;
+  width: $fullWidth;
+  height: $fullHeight;
+}
+.flex-container > div{
+
+
+
+}
+.Logo_Title{
+  display: $displayFlex;
+  height: 11em;
+}
+
+.Logo_Title > div:nth-child(2){
+  width: 1.5em;
+}
+
+#welcome-to{
+  font-size: $fontSubTitle;
+  color: $fontDefaultColor;
+  height: .1em;
+}
+
+#The{
+  font-size: $titleFontSize;
+  font-family: $fontBold;
+  color: $fontDefaultColor;
+ 
+}
+#Forum{
+  color: $specialFontColor;
+  font-size: $titleFontSize;
+  font-family: $fontBold;
+  
+}
+
+.flex-center{
+  align-items: $centerContent;
+  justify-content: $centerContent;
+}
+
+.flex-vertical{
+  flex-direction: $column;
+}
+
+.Begin-Button{
+  background: $none;
+  border: $none;
+  background-color: $specialFontColor;
+  font-size: 2em;
+  font-family: $fontBold;
+  width: 6em;
+  height: 1.5em;
+  color: $buttonColor;
+  border-radius: $buttonRadius;
+  box-shadow: 1px 4px 15px 2px rgba(0,0,0,0.31);
+  cursor: $pointerCursor;
+}
+
+
