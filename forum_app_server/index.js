@@ -3,7 +3,7 @@ const express = require('express');
 const bodyparser = require('body-parser');   //Parses html body parts into js
 const mysql = require('mysql');
 const cors = require('cors');
-const { encrypt, decrypt } = require('./encryptionHndler');
+const { encrypt, decrypt } = require('./encryptionHandler');
 
 //Creating objects for use of dependency functions
 const app = express();
@@ -12,21 +12,16 @@ const db = mysql.createPool({
     //Pool access credentials
     host: 'localhost',
     user: 'root',
-    password: '**********',
-    database: 'message_app_db',
+    password: 'TheUshanka!2',
+    database: 'forum_app_db',
     multipleStatements: 'true'
 
 });
 
 //Allows the request of triggered events in https server instance
 app.use(bodyparser.urlencoded({extended: true}));
-app.use(express());
 app.use(cors());
 app.use(express.json()); //allows body parsing of front end data from axios
-
-
-//Creating objects for use of dependency functions
-const app = express();
 
 app.post('/register', async (req, res) => {
 
@@ -35,12 +30,29 @@ app.post('/register', async (req, res) => {
     const user_pass = req.body.user_pass;
     const user_confirm = req.body.user_confirm;
 
-    var registerUserIns = "";
+    //Encrypt password
+    const scramblePassword = encrypt(user_pass);
 
+    var registerUserIns = "INSERT INTO user_info_db (user_name, user_email, user_password, iv) VALUES (?,?,?,?);";
+
+    //Query the above SQL command with the specific parameters to gather user data on front end
+    db.query(
+        registerUserIns, 
+        [user, email, scramblePassword.password, scramblePassword.iv], 
+        (err, result) => {
+            
+            if(err){
+                console.log(err);
+            }else{
+                console.log(result);
+            }
+
+            res.send(result);
+            
+    }); 
     
 
 });
-
 
 //Login authentication
 app.post('/login', async ( req, res) => {
@@ -58,7 +70,7 @@ app.post('/login', async ( req, res) => {
     db.query(
 
         sqlLoginSLC,
-        [email], //Grab body parser values
+        [email, password], //Grab body parser values
         (err, result, fields) => { //Feedback after process
 
             //If there are errors

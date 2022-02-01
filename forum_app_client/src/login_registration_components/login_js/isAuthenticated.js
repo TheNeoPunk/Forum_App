@@ -3,7 +3,6 @@ class Auth {  //Global authentication variable
     //Create global auth variable
     constructor() {
       this.authenticated = false;
-      console.log(this.authenticated);
     }
   
     //function to return valid authentication

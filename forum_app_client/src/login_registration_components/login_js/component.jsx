@@ -24,7 +24,7 @@ class Auth {  //Global authentication variable
       console.log(this.authenticated);
       return this.authenticated;
     }*/
-  }
+}
     
-    export default new Auth();
+export default new Auth();
     
