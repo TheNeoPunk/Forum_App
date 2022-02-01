@@ -12,7 +12,7 @@ const db = mysql.createPool({
     //Pool access credentials
     host: 'localhost',
     user: 'root',
-    password: '********',
+    password: 'TheUshanka!2',
     database: 'forum_app_db',
     multipleStatements: 'true'
 
@@ -55,22 +55,20 @@ app.post('/register', async (req, res) => {
 });
 
 //Login authentication
-app.post('/login', async ( req, res) => {
+app.post('/login', ( req, res) => {
 
     //body parsing user insertted login data
-    const email = req.body.auth_email;
-    const password = req.body.auth_pass;
-    //const encrypt_pass = req.body.encryption.password,
-    //const iv = req.body.encryption.iv
+    const email = req.body.user_email;
+    const password = req.body.user_pass;
 
     //SQL command to select existing queries in DB
-    const sqlLoginSLC = "SELECT * FROM message_app_db.user_info WHERE user_email = ?";
+    const sqlLoginSLC = "SELECT * FROM forum_app_db.user_info_db WHERE user_email = ?";
     
     //Query into table
     db.query(
 
         sqlLoginSLC,
-        [email, password], //Grab body parser values
+        [email], //Grab body parser values
         (err, result, fields) => { //Feedback after process
 
             //If there are errors
@@ -79,27 +77,21 @@ app.post('/login', async ( req, res) => {
                 res.send(err);
             }
 
+            //console.log(result[0].user_password);
+            
             //Check for results from SQL command
             if(result.length > 0){
-
                 //Log decryption
-                const decipheredPass = decrypt(result[0].user_pass, result[0].iv);
+                const decipheredPass = decrypt(result[0].user_password, result[0].iv);
+                console.log(decipheredPass)
                 if(password === decipheredPass){
-
-                    console.log(decrypt(result[0].user_pass, result[0].iv));
-
+                    //console.log(decrypt(result[0].user_pass, result[0].iv));
                     //Send result
                     res.send(result);
-                    
                 }else{
-
                     //Send feedback otherwise
                     res.send({message: "Incorrect credentials"});
-
                 }
-                //Send decrypted password
-                //res.send(decrypt(password));
-                //console.log(result);
 
             }else{
                 //Send feedback otherwise

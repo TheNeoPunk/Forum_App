@@ -1,5 +1,7 @@
 import { Link, BrowserRouter } from 'react-router-dom';  //import for page navigation
 import Logo from '../sub_components/Logo_Title';
+import Axios from 'axios';
+import Auth from './login_js/isAuthenticated';
 import React, { Component, useState } from 'react';
 
 //scss imports
@@ -8,34 +10,38 @@ import './login_register_css/login_component.scss';
 function Login_Component(){
 
     //login existing user values initiated
-  let [userValues, setUserValues] = useState({
+  let [userLoginValues, setLoginValues] = useState({
     email: '',
     password: ''
   });
 
   //Grabs multiple input values into one function
-  function handleChange(event){
+  function handleLoginChange(event){
     event.preventDefault();
+    
     let inputValue = event.target.value
-    setUserValues({
-      ...userValues,
+    setLoginValues({
+      ...userLoginValues,
       [event.target.name]: inputValue
     });
-    console.log(userValues)
   }
 
   //Registry submission method
   function redirecToForum(event) {
-
-    const {email, password} = userValues
-    event.preventDefault()
-
-   /* Axios.post("http://localhost:3001/login", {
+    const {email, password} = userLoginValues
+    event.preventDefault();
+    console.log(email)
+    Axios.post("http://localhost:3001/login", {
 
       //Assigns data from this path
       user_email: email, 
-      user_pass: password,  
-    });*/
+      user_pass: password
+
+    }).then((response) => {
+
+      console.log(response)
+
+    });
   }
 
   return (
@@ -50,11 +56,11 @@ function Login_Component(){
         </div>
         <form className="register-form" onSubmit={redirecToForum}>
           <div>
-            <input className="email" type="text" placeholder='email' value={userValues.email} onChange={handleChange}/><br />
-            <input className="password" type="text" placeholder='password' value={userValues.password} onChange={handleChange}/><br />
+            <input className="email" type="email" name="email" placeholder='email' value={userLoginValues.email} onChange={ handleLoginChange}/><br />
+            <input className="password" type="text" name="password" placeholder='password' value={userLoginValues.password} onChange={ handleLoginChange}/><br />
           </div>
           <div>
-            <button className="Begin-Button">Login</button>
+            <button className="Begin-Button" type="submit">Login</button>
           </div>
         </form>
       </div>

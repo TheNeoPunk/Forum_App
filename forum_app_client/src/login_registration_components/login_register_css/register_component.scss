@@ -1,4 +1,8 @@
-
+@font-face {
+    font-family: 'Monsterrat-Bold';
+    src: url('../../font/Montserrat-Bold.ttf');
+}
+  
 $none: none;
 $registerFormWidth: 15em;
 $register-radius: 50px;
@@ -7,7 +11,7 @@ $registerInputMargin: .5em;
 $registerInputHeight: 0;
 $registerInputColor: white;
 $fontDefaultColor: #707070;
-$fontBold: bold;
+$fontBold: 'Monsterrat-Bold';
 
 /*Register CSS*/
 .register-form{
@@ -19,32 +23,25 @@ $fontBold: bold;
     margin: 1em;
 }
 .register-form-title{
-
     font-size: 2em;
     color: $fontDefaultColor;
-
 }
 textarea:focus, input:focus{
     outline: none;
 }
 
 .user{
-
     background-color: #7074F9;
-
 }
 
 .email{
-
     background-color: #77C5F9;
 }
 .password, .password-confirm{
-
     background-color: #5D78E6;
 }
 
 .register-form > div > input {
-
     width: $registerFormWidth;
     border-radius: $register-radius;
     border: $none;
@@ -55,5 +52,10 @@ textarea:focus, input:focus{
     color: $registerInputColor;
     font-size: 1.3em;
     font-weight: $fontBold;
+}
+
+.no-match-message{
+
+    font-family: $fontBold;
 
 }

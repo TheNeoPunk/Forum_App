@@ -78,7 +78,7 @@ function Register_Component(){
              
           <div className="flex-container flex-center flex-vertical">
             <div className="col-10 no-match-pass-div rounded-3">
-              <p className="text-danger fw-bold">{passNoMatchMessage} </p>
+              <p className="text-danger fw-bold no-match-message">{passNoMatchMessage} </p>
             </div>   
             <Logo />
             <div>
