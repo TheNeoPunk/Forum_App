@@ -12,8 +12,8 @@ function Landing_Component(){
               <div className='flex-grow-1'></div>
               <p id="welcome-to">Welcome To </p>
               <Logo />
-              <div className='flex-grow-1'></div>
               <Link to="/register"><button className="Begin-Button">BEGIN</button></Link>
+              <div className='flex-grow-1'></div>
             </div>
         </div>
 

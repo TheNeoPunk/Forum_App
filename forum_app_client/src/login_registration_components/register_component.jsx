@@ -86,7 +86,7 @@ function Register_Component(){
                 <p>Create an account</p>
               </div>
               <div><Link className='link' to="/login">Already have one? Login</Link></div>
-          </div>
+            </div>
             <form className="register-form" onSubmit={redirecToForum}>
               <div>
                 {/* values become the state declared values in useState constructor */}

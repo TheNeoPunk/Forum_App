@@ -1,4 +1,4 @@
-
+@import "~bootstrap/scss/bootstrap";
 
 @font-face {
   font-family: 'Monsterrat';
@@ -52,6 +52,7 @@ html, body{
   display: $displayFlex;
   width: $fullWidth;
   height: $fullHeight;
+
 }
 .flex-container > div{
 
