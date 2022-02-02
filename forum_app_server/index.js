@@ -12,7 +12,7 @@ const db = mysql.createPool({
     //Pool access credentials
     host: 'localhost',
     user: 'root',
-    password: 'TheUshanka!2',
+    password: '*********',
     database: 'forum_app_db',
     multipleStatements: 'true'
 
