@@ -20,9 +20,9 @@ function App() {
         <Routes>
           
           <Route path="/" exact element={<Landing_Component />} />
-          <Route path="/register" exact element={<Register_Component />} />
-          <Route path="/login" exact element={<Login_Component />} />
-          <Route path="/main_feed" exact element={
+          <Route path="/register" element={<Register_Component />} />
+          <Route path="/login" element={<Login_Component />} />
+          <Route path="/main_feed" element={
             <ProtectRoute>
               <Main_Feed_Component />
             </ProtectRoute>} 

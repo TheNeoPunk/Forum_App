@@ -24,7 +24,6 @@ function Register_Component(){
 
   let [passNoMatchMessage, setMatchMssg] = useState(null);
 
-  console.log(Auth.authenticated);
 
   //Grabs multiple input values into one function
   function handleChange(event){
@@ -55,19 +54,19 @@ function Register_Component(){
 
       }).then((res, err) => {
 
-        console.log(res.data);
-
+        Auth.login();
+     
       });
+
     }else if(password !== confirmPassword){
 
       setMatchMssg('Passwords do not match');
 
     }
 
-    
   }
 
-  if(Auth.authenticated == true){
+  if(Auth.isAuthenticated() == true){
     return <Navigate to={{
       pathname: "/main_feed",
     }} />

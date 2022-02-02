@@ -7,6 +7,7 @@ import Main_Feed_Component from '../page_content_components/main_thread_componen
 //Takes in children element of <ProtectRoute>
 function ProtectRoute({ children }){
     
+    console.log(children);
     //Return a specific route with its props
     if(Auth.authenticated){
         return children

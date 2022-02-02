@@ -1,4 +1,4 @@
-import { Link, BrowserRouter } from 'react-router-dom';  //import for page navigation
+import { Link, BrowserRouter, Navigate } from 'react-router-dom';  //import for page navigation
 import Logo from '../sub_components/Logo_Title';
 import Axios from 'axios';
 import Auth from './login_js/isAuthenticated';
@@ -15,6 +15,9 @@ function Login_Component(){
     password: ''
   });
 
+  let [renderIncMssg, setMssg] = useState(null)
+  let [authToRedir, setAuth] = useState(false)
+
   //Grabs multiple input values into one function
   function handleLoginChange(event){
     event.preventDefault();
@@ -30,7 +33,7 @@ function Login_Component(){
   function redirecToForum(event) {
     const {email, password} = userLoginValues
     event.preventDefault();
-    console.log(email)
+    
     Axios.post("http://localhost:3001/login", {
 
       //Assigns data from this path
@@ -38,15 +41,36 @@ function Login_Component(){
       user_pass: password
 
     }).then((response) => {
+      //console.log(response)
 
-      console.log(response)
+      if(response.data.message){
+
+        setMssg(response.data.message);
+
+      }//Else if there is a match
+      else if(response.data){
+
+        //Authorize a redirect
+        setAuth(Auth.login());
+
+      }
 
     });
+  }
+
+  
+  if(Auth.isAuthenticated() == true){
+    return <Navigate to={{
+      pathname: "/main_feed",
+    }} />
   }
 
   return (
       <div className="App">
       <div className="flex-container flex-center flex-vertical">
+        <div className="col-10 no-match-pass-div rounded-3">
+            <p className="text-danger fw-bold no-match-message">{renderIncMssg} </p>
+        </div>   
         <Logo />
         <div>
           <div className='register-form-title'>
