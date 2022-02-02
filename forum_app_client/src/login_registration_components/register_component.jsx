@@ -23,7 +23,7 @@ function Register_Component(){
   });
 
   let [passNoMatchMessage, setMatchMssg] = useState(null);
-
+  let [authToRedir, setAuth] = useState(false);
 
   //Grabs multiple input values into one function
   function handleChange(event){
@@ -54,8 +54,13 @@ function Register_Component(){
 
       }).then((res, err) => {
 
-        Auth.login();
-     
+        if(err){
+          console.log(err)
+        }else{
+          Auth.login();
+          setAuth(Auth.isAuthenticated())
+          console.log(res)
+        }
       });
 
     }else if(password !== confirmPassword){
@@ -67,14 +72,17 @@ function Register_Component(){
   }
 
   if(Auth.isAuthenticated() == true){
+    
     return <Navigate to={{
       pathname: "/main_feed",
+      state: {
+       // user_name: auth_email
+      }
     }} />
   }
 
   return (
       <div className="App">
-             
           <div className="flex-container flex-center flex-vertical">
             <div className="col-10 no-match-pass-div rounded-3">
               <p className="text-danger fw-bold no-match-message">{passNoMatchMessage} </p>

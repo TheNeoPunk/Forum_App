@@ -46,12 +46,8 @@ app.post('/register', async (req, res) => {
             }else{
                 console.log(result);
             }
-
             res.send(result);
-            
     }); 
-    
-
 });
 
 //Login authentication
@@ -88,6 +84,7 @@ app.post('/login', ( req, res) => {
                     //console.log(decrypt(result[0].user_pass, result[0].iv));
                     //Send result
                     res.send(result);
+                    console.log(result)
                 }else{
                     //Send feedback otherwise
                     res.send({message: "Incorrect credentials"});

@@ -15,8 +15,8 @@ function Login_Component(){
     password: ''
   });
 
-  let [renderIncMssg, setMssg] = useState(null)
-  let [authToRedir, setAuth] = useState(false)
+  let [renderIncMssg, setMssg] = useState(null);
+  let [authToRedir, setAuth] = useState(false);
 
   //Grabs multiple input values into one function
   function handleLoginChange(event){
@@ -51,17 +51,28 @@ function Login_Component(){
       else if(response.data){
 
         //Authorize a redirect
-        setAuth(Auth.login());
+        Auth.login();
+        setAuth(Auth.isAuthenticated());
+        
+        localStorage.setItem('user_name', response.data[0].user_name);
+        localStorage.setItem('number_of_threads', response.data[0].number_of_threads)
 
       }
 
     });
   }
 
-  
+  console.log(authToRedir)
   if(Auth.isAuthenticated() == true){
+    
     return <Navigate to={{
       pathname: "/main_feed",
+      state : {
+
+        user_name: localStorage.getItem('user_name'),
+        number_of_threads: localStorage.getItem('number_of_threads')
+
+      }
     }} />
   }
 
