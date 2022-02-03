@@ -1,0 +1,35 @@
+@import "../../App.scss";
+
+$navHeight: 5vh;
+
+.nav-bar{
+
+    background-color: gray;
+    width: $fullWidth;
+    height: $navHeight;
+    box-shadow: 0px 5px 10px -3px rgba(0,0,0,0.5);
+    text-align: $centerContent;
+}
+
+.nav-item{
+
+}
+
+.col { 
+    background-color: white; 
+    height: $navHeight; 
+    display:$displayFlex; 
+    align-items: $centerContent;
+    justify-content: $centerContent;
+}
+
+.col-10 { 
+    background-color: white; 
+    height: $navHeight; 
+    display:$displayFlex; 
+    align-items: $centerContent;
+    justify-content: $centerContent;
+}
+
+.row { width: $fullWidth; background-color: red; }
+.container{width: $fullWidth; background-color: hotpink;}

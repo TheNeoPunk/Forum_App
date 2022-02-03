@@ -3,11 +3,39 @@ import { Link, BrowserRouter } from 'react-router-dom';  //import for page navig
 import React, { Component,  useState } from 'react';
 import Axios from 'axios';
 
-function Main_Feed_Component () {
+//Component imports
+import NavBar from './sub_components/navigation_component';
+
+function Main_Feed_Component () {    
 
     return(
-
-        <div>Hello World</div>
+        
+        <div>
+            <NavBar />
+            {/********************************************** */}
+            <div class="container sub-title">
+              <div class="row">
+              
+                <div class="col">
+                  Column
+                </div>
+                
+              </div>
+            </div>  
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  Column
+                </div>
+                <div class="col">
+                  Column
+                </div>
+                <div class="col">
+                  Column
+                </div>
+              </div>
+            </div>  
+        </div>
 
     );
 

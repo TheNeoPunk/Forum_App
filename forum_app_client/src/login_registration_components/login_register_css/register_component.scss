@@ -1,3 +1,5 @@
+@import '../../App.scss';
+
 @font-face {
     font-family: 'Monsterrat-Bold';
     src: url('../../font/Montserrat-Bold.ttf');
@@ -10,8 +12,7 @@ $registerInputPad: 1.25em;
 $registerInputMargin: .5em;
 $registerInputHeight: 0;
 $registerInputColor: white;
-$fontDefaultColor: #707070;
-$fontBold: 'Monsterrat-Bold';
+
 
 /*Register CSS*/
 .register-form{
