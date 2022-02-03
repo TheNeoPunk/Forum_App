@@ -25,7 +25,6 @@ const encrypt = (password) => {
         iv: iv.toString('hex'), 
         password: encryptedPassword.toString("hex")
     };
-
 }
 
 //Decrypts incoming password

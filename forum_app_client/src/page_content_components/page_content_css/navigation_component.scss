@@ -1,9 +1,9 @@
 @import "../../App.scss";
 
 $navHeight: 5vh;
+$subTitlePadding: 2em;
 
 .nav-bar{
-
     background-color: gray;
     width: $fullWidth;
     height: $navHeight;
@@ -12,16 +12,19 @@ $navHeight: 5vh;
 }
 
 .nav-item{
-
-}
-
-.col { 
-    background-color: white; 
-    height: $navHeight; 
     display:$displayFlex; 
     align-items: $centerContent;
     justify-content: $centerContent;
 }
+
+
+.col { 
+ 
+   
+    
+    
+}
+
 
 .col-10 { 
     background-color: white; 
@@ -31,5 +34,14 @@ $navHeight: 5vh;
     justify-content: $centerContent;
 }
 
-.row { width: $fullWidth; background-color: red; }
-.container{width: $fullWidth; background-color: hotpink;}
+.row { width: $fullWidth;  }
+.container{width: $fullWidth; }
+
+.container-fluid{height: $fullHeight;}
+
+.sub-title{
+
+    font-size: $fontSubTitle;
+    padding: $subTitlePadding;
+
+}

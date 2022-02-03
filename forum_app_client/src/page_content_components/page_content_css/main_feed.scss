@@ -1,0 +1,55 @@
+@import "../../App.scss";
+
+$mainFeedContentMargin: 3em;
+
+.side-nav{
+    border-right: 5px solid #DC7878;
+    height: $fullHeight;
+
+}
+
+.side-nav > div{
+
+    margin: $mainFeedContentMargin;
+
+}
+
+.filter-bar-item {
+    padding: $mainFeedContentMargin;
+}
+
+.side-nav-row{
+
+    height: $fullHeight;
+    
+}
+
+.side-nav-item{
+
+    padding: 1em;
+
+    font-family: $fontBold;
+}
+
+.create-thread-button{
+    width: 13em;
+    padding: .5em;
+    font-family: $fontBold;
+    border-radius: $buttonRadius;
+    border: $none;
+}
+
+.sub-title{
+   
+    font-family: $fontBold;
+}
+
+.filter-item{
+    padding-left: $mainFeedContentMargin;
+}
+
+.feed-item{
+
+    width: $fullWidth;
+    background-color: gray;
+}

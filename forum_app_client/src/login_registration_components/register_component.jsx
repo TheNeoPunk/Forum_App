@@ -62,17 +62,12 @@ function Register_Component(){
           console.log(res)
         }
       });
-
     }else if(password !== confirmPassword){
-
       setMatchMssg('Passwords do not match');
-
     }
-
   }
 
   if(Auth.isAuthenticated() == true){
-    
     return <Navigate to={{
       pathname: "/main_feed",
       state: {
