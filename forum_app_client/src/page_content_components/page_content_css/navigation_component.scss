@@ -25,13 +25,9 @@ $subTitlePadding: 2em;
     
 }
 
-
-.col-10 { 
+.nav-search { 
     background-color: white; 
     height: $navHeight; 
-    display:$displayFlex; 
-    align-items: $centerContent;
-    justify-content: $centerContent;
 }
 
 .row { width: $fullWidth;  }

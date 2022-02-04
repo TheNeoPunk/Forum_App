@@ -14,7 +14,7 @@ function NavBar() {
 
                 </div>
                
-                <div className="col-10 nav-item">
+                <div className="col-10 nav-item nav-search">
               
                   <div className="">Item</div>
                 

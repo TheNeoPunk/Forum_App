@@ -1,6 +1,7 @@
 @import "../../App.scss";
 
 $mainFeedContentMargin: 3em;
+$feedItemMargin: 1em;
 
 .side-nav{
     border-right: 5px solid #DC7878;
@@ -52,4 +53,48 @@ $mainFeedContentMargin: 3em;
 
     width: $fullWidth;
     background-color: gray;
+    border-radius: $buttonRadius;
 }
+
+.feed-header{
+
+    margin: $feedItemMargin;
+
+}
+
+.comment-container{
+
+    margin: $feedItemMargin;
+
+}
+
+.content-container{
+    margin: $feedItemMargin;
+}
+
+.like-dislike-container{
+    padding: $mainFeedContentMargin;
+}
+
+.like-dislike-container > div {
+
+  
+
+}
+
+.feed-pagentation{
+    display: $displayFlex;
+}
+.feed-pagentation > div{
+
+    margin-left: $feedItemMargin;
+
+}
+
+button{
+
+    border: $none;
+    background-color: none;
+    background: none;
+  
+  }
