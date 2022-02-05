@@ -28,6 +28,22 @@ $subTitlePadding: 2em;
 .nav-search { 
     background-color: white; 
     height: $navHeight; 
+    
+  
+}
+
+.nav-search > div {
+    padding-left: 1em;
+}
+
+.search-bar{
+    width: 20em;
+    border-radius: $buttonRadius;
+    border: $none;
+    background-color: #DC7878;
+    padding-left: $subTitlePadding;
+    font-size: 1em;
+    color: $buttonColor;
 }
 
 .row { width: $fullWidth;  }
@@ -41,3 +57,4 @@ $subTitlePadding: 2em;
     padding: $subTitlePadding;
 
 }
+

@@ -7,7 +7,7 @@ import './page_content_css/main_feed.scss';
 
 //Font Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleUp, faAngleDown, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { faAngleUp, faAngleDown, faAngleLeft, faAngleRight, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 //Component imports
 import NavBar from './sub_components/navigation_component';
@@ -41,7 +41,7 @@ function Main_Feed_Component () {
               </div>
             </div>
             {/********************************************** */}
-            <div className="col-9">
+            <div className="col-9" style={{backgroundColor: "#F8F8F8"}}>
               <div className="container">
                 <div className="row">
                   <div className="col filter-bar-item flex-center">
@@ -66,9 +66,9 @@ function Main_Feed_Component () {
                       <div className="container ">
                         <div className="row">
                           <div className="col-1 like-dislike-container">
-                              <div> <button><FontAwesomeIcon icon={faAngleUp} /></button></div>
+                              <div> <FontAwesomeIcon icon={faAngleUp} /></div>
                               <div> Number of Likes </div>
-                              <div> <button><FontAwesomeIcon icon={faAngleDown} /></button></div>
+                              <div> <FontAwesomeIcon icon={faAngleDown} /></div>
                           </div>
                           <div class="col-11">
                             <div class="container feed-header">
@@ -100,8 +100,9 @@ function Main_Feed_Component () {
                             </div>
                             <div class="container comment-container">
                               <div class="row">
-                                <div class="col">
-                                  Comments
+                                <div class="col comment-column">
+                                  <div>Comments</div>
+                                  <div> <FontAwesomeIcon icon={faEllipsisH} /></div>
                                 </div>
                               </div>
                             </div>

@@ -52,8 +52,9 @@ $feedItemMargin: 1em;
 .feed-item{
 
     width: $fullWidth;
-    background-color: gray;
+    background-color: white;
     border-radius: $buttonRadius;
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.18);
 }
 
 .feed-header{
@@ -76,9 +77,9 @@ $feedItemMargin: 1em;
     padding: $mainFeedContentMargin;
 }
 
-.like-dislike-container > div {
+.l-d-button {
 
-  
+  background-color: $none;
 
 }
 
@@ -88,13 +89,25 @@ $feedItemMargin: 1em;
 .feed-pagentation > div{
 
     margin-left: $feedItemMargin;
-
+   
 }
 
 button{
 
     border: $none;
-    background-color: none;
-    background: none;
+   
   
   }
+
+.comment-column{
+
+    display: $displayFlex;
+
+}
+.comment-column > div{margin: $feedItemMargin;}
+
+.create-thread-button{
+
+    background-color: #373737;
+    color: white;
+}
