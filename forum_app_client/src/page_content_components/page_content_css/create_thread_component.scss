@@ -1,0 +1,49 @@
+@import "../../App.scss";
+
+$borderRadius: 25px;
+
+.create-thread-row > div{
+   
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.33);
+    height: 500px;
+    margin: 1em;
+    border-radius: $borderRadius;
+}
+
+.thread-item{
+
+    margin: 1em;
+}
+
+.thread-item > input , textarea {
+
+    width: $fullWidth;
+    border-radius: $borderRadius;
+    border: $none;
+    background-color: #79ACD8;
+    padding: 1.5em;
+}
+
+.thread-item > input {
+
+    height: 5vh;
+
+}
+
+.thread-item > textarea {
+
+    min-height: 22vh;
+    max-height: 22vh;
+
+}
+
+.thread-button{
+
+    background-color: #DC7878;
+    color: $buttonColor;
+    font-family: $fontBold;
+    padding: 1em;
+    border-radius: $borderRadius;
+    
+}
+

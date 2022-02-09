@@ -62,7 +62,6 @@ function Login_Component(){
     });
   }
 
-  console.log(authToRedir)
   if(Auth.isAuthenticated() == true){
     
     return <Navigate to={{

@@ -11,6 +11,8 @@ import Landing_Component from './landing_component';
 import Login_Component from './login_registration_components/login_component';
 import Main_Feed_Component from './page_content_components/main_thread_component';
 import ProtectRoute from './login_registration_components/protected_route';
+import Create_Thread_Component from './page_content_components/create_thread_component';
+import Thread_Post_Component from './page_content_components/thread_post_component';
 
 
 function App() {
@@ -25,6 +27,16 @@ function App() {
           <Route path="/main_feed" element={
             <ProtectRoute>
               <Main_Feed_Component />
+            </ProtectRoute>} 
+          />
+          <Route path="/createThread" element={
+            <ProtectRoute>
+              <Create_Thread_Component />
+            </ProtectRoute>} 
+          />
+          <Route path="/postThread" element={
+            <ProtectRoute>
+              <Thread_Post_Component />
             </ProtectRoute>} 
           />
 

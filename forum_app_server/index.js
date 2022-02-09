@@ -12,7 +12,7 @@ const db = mysql.createPool({
     //Pool access credentials
     host: 'localhost',
     user: 'root',
-    password: '*********',
+    password: '**********',
     database: 'forum_app_db',
     multipleStatements: 'true'
 
@@ -72,8 +72,6 @@ app.post('/login', ( req, res) => {
                 //Log errors to front end
                 res.send(err);
             }
-
-            //console.log(result[0].user_password);
             
             //Check for results from SQL command
             if(result.length > 0){
@@ -81,7 +79,6 @@ app.post('/login', ( req, res) => {
                 const decipheredPass = decrypt(result[0].user_password, result[0].iv);
                 console.log(decipheredPass)
                 if(password === decipheredPass){
-                    //console.log(decrypt(result[0].user_pass, result[0].iv));
                     //Send result
                     res.send(result);
                     console.log(result)
@@ -89,16 +86,37 @@ app.post('/login', ( req, res) => {
                     //Send feedback otherwise
                     res.send({message: "Incorrect credentials"});
                 }
-
             }else{
                 //Send feedback otherwise
                 res.send({message: "Incorrect credentials"});
             }
-
         }
-
     );
+});
 
+//Handle thread creation to forum feed
+app.post('/createThread', (req, res) => {
+
+    const thread_title = req.body.thread_title;
+    const thread_content = req.body.thread_content;
+    const thread_owner = req.body.thread_owner;
+    const thread_comments = '[]';
+
+    const sqlThread = "INSERT INTO user_threads (thread_owner, thread_content, thread_title, thread_comments) VALUES (?,?,?,?);"
+
+    db.query(
+        sqlThread,
+        [thread_owner, thread_content, thread_title, thread_comments],
+        (err, result) => {
+
+            if(err){
+                res.send(err);
+            }else{
+                res.send(result)
+            }
+            console.log(result)
+        }
+    );
 });
 
 app.get('/', (req, res) => {

@@ -45,7 +45,6 @@ const decrypt = (encryptedPass, iv) => {
     
     //Return deciphered value
     return decryptedPassword.toString();
-
 }
 
 //Export arrow functions to server

@@ -12,7 +12,7 @@ import { faAngleUp, faAngleDown, faAngleLeft, faAngleRight, faEllipsisH } from '
 //Component imports
 import NavBar from './sub_components/navigation_component';
 
-function Main_Feed_Component () {    
+function Main_Feed_Component () {   
 
   return(
     <div>
@@ -32,7 +32,7 @@ function Main_Feed_Component () {
             <div className="col side-nav">
               <div className="flex-vertical flex-center">
                 <div className='create-thread-button-container'>
-                  <button className="create-thread-button">Create a Thread</button>
+                  <Link to="/createThread"><button className="create-thread-button">Create a Thread</button></Link>
                 </div>
                 <div className="side-nav-item flex-center">Item</div>
                 <div className="side-nav-item flex-center">Item</div>
