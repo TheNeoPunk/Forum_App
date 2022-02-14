@@ -1,0 +1,35 @@
+@import '../../App.scss';
+
+
+$threadPostMargin: 2.5em;
+
+.thread-post-container{
+
+    margin-top: $threadPostMargin;
+
+}
+
+.comment-button-container{
+
+    margin-top: $threadPostMargin;
+
+}
+
+.comments-container{
+    margin-top: $threadPostMargin;
+
+}
+
+.comment-button{
+
+    background-color: $threadButtonColor;
+    color: $buttonColor;
+    font-size: 1.2em;
+    width: 8em;
+    border-radius: $buttonRadius;
+}
+
+.comment-item-container{
+    width: $fullWidth;
+
+}

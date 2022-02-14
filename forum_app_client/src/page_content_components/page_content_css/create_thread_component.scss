@@ -39,7 +39,7 @@ $borderRadius: 25px;
 
 .thread-button{
 
-    background-color: #DC7878;
+    background-color: $threadButtonColor;
     color: $buttonColor;
     font-family: $fontBold;
     padding: 1em;
