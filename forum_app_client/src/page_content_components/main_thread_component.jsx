@@ -16,7 +16,23 @@ import Filter_Content_Component from './sub_components/filter_content_component'
 function Main_Feed_Component () {   
 
   const { state } = useLocation();
-  console.log(state);
+  console.log(state.existing_threads);
+
+  function RenderFeedItem(existing_thread_items){
+
+    var total_thread_items = [];
+
+    for(var i = 0; i <= existing_thread_items.length; i++){
+
+      total_thread_items.push(
+
+      );
+
+    }
+
+    return total_thread_items;
+
+  }
 
   return(
     <div>

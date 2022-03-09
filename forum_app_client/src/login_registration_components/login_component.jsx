@@ -62,10 +62,12 @@ function Login_Component(){
 
     });
 
-    Axios.get('http://localhost:3001/grabAllThreads').then(function(results) {  
-      console.log(results.data);
-      setThreads([currThreads, results.data]);
+    Axios.get('http://localhost:3001/grabAllThreads').then(function(response) {  
+      console.log(response.data);
+      setThreads([currThreads, response.data]);
+     
     });
+    
   }
 
   if(Auth.isAuthenticated() == true){
