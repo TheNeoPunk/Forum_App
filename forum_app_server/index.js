@@ -12,7 +12,7 @@ const db = mysql.createPool({
     //Pool access credentials
     host: 'localhost',
     user: 'root',
-    password: '*********',
+    password: 'TheUshanka!2',
     database: 'forum_app_db',
     multipleStatements: 'true'
 
@@ -77,11 +77,11 @@ app.post('/login', ( req, res) => {
             if(result.length > 0){
                 //Log decryption
                 const decipheredPass = decrypt(result[0].user_password, result[0].iv);
-                console.log(decipheredPass)
+                //console.log(decipheredPass)
                 if(password === decipheredPass){
                     //Send result
                     res.send(result);
-                    console.log(result)
+                    //console.log(result)
                 }else{
                     //Send feedback otherwise
                     res.send({message: "Incorrect credentials"});
@@ -115,6 +115,25 @@ app.post('/createThread', (req, res) => {
                 res.send(result)
             }
             console.log(result)
+        }
+    );
+});
+
+app.get('/grabAllThreads', (req, res) => {
+
+    const threadQuerySQL = "SELECT * FROM forum_app_db.user_threads;";
+
+
+    db.query(
+        threadQuerySQL,
+        (err, result) => {
+            if(err){
+                console.log(err);
+            }else{
+                console.log(result);
+            }
+            res.send(result);
+            console.log('this is responding');
         }
     );
 });

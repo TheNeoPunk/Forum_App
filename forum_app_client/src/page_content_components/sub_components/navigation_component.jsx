@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { Link, Navigate } from 'react-router-dom';  //import for page navigation
+
+//scss imports
 import '../page_content_css/navigation_component.scss'
 import '../../App.scss';
 
 //Font Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch} from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faUser} from '@fortawesome/free-solid-svg-icons'
 
 function NavBar() {
 
@@ -14,7 +17,7 @@ function NavBar() {
               <div className="row">
                 <div className="col nav-item">
 
-                 
+                  <Link className="nav-link" to="/main_feed">The Forum</Link>
 
                 </div>
                
@@ -31,7 +34,8 @@ function NavBar() {
               
                 <div className="col nav-item">
                 
-                  
+                  <FontAwesomeIcon icon={faUser} />
+              
                   
                 </div>
               </div>

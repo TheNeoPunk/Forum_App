@@ -23,7 +23,7 @@ function Thread_Post_Component(){
                 <div className="container">
                   <div className="row">
                     <div className="col-1">
-                      Column
+                     
                     </div>
                     <div className="col-10">
                         <div className="feed-item">
@@ -76,7 +76,7 @@ function Thread_Post_Component(){
                         <div className="container comment-button-container">
                           <div className="row">
                             <div className="col">
-                              Column
+                           
                             </div>
                             <div className="col-9 flex-center flex-column">
                               <div><button className='comment-button'>comment</button></div>
@@ -89,13 +89,13 @@ function Thread_Post_Component(){
                               </div>
                             </div>
                             <div className="col">
-                              Column
+                              
                             </div>
                           </div>
                         </div>
                     </div>
                     <div class="col-1">
-                      Column
+                    
                     </div>
                   </div>
                 </div>

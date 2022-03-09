@@ -24,6 +24,8 @@ function Create_Thread_Component(){
 
   let [authPost, setPost] = useState(false);
 
+  
+
   function handleThreadInput(event){
     event.preventDefault();
     let inputValue = event.target.value
@@ -52,7 +54,9 @@ function Create_Thread_Component(){
     });
   }
 
-  if(AuthPost.isPostAuthorized() == true){
+  console.log(authPost);
+
+  if(authPost == true){
     return <Navigate to={{
       pathname: "/postThread"
     }} />

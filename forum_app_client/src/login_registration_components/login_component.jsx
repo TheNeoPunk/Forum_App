@@ -1,4 +1,4 @@
-import { Link, BrowserRouter, Navigate } from 'react-router-dom';  //import for page navigation
+import { Link, BrowserRouter, Navigate, useLocation } from 'react-router-dom';  //import for page navigation
 import Logo from '../sub_components/Logo_Title';
 import Axios from 'axios';
 import Auth from './login_js/isAuthenticated';
@@ -9,7 +9,7 @@ import './login_register_css/login_component.scss';
 
 function Login_Component(){
 
-    //login existing user values initiated
+  //login existing user values initiated
   let [userLoginValues, setLoginValues] = useState({
     email: '',
     password: ''
@@ -17,6 +17,8 @@ function Login_Component(){
 
   let [renderIncMssg, setMssg] = useState(null);
   let [authToRedir, setAuth] = useState(false);
+
+  let [currThreads, setThreads] = useState([]);
 
   //Grabs multiple input values into one function
   function handleLoginChange(event){
@@ -31,9 +33,10 @@ function Login_Component(){
 
   //Registry submission method
   function redirecToForum(event) {
+
     const {email, password} = userLoginValues
     event.preventDefault();
-    
+
     Axios.post("http://localhost:3001/login", {
 
       //Assigns data from this path
@@ -49,30 +52,28 @@ function Login_Component(){
 
       }//Else if there is a match
       else if(response.data){
-
         //Authorize a redirect
         Auth.login();
         setAuth(Auth.isAuthenticated());
         
         localStorage.setItem('user_name', response.data[0].user_name);
         localStorage.setItem('number_of_threads', response.data[0].number_of_threads)
-
       }
 
+    });
+
+    Axios.get('http://localhost:3001/grabAllThreads').then(function(results) {  
+      console.log(results.data);
+      setThreads([currThreads, results.data]);
     });
   }
 
   if(Auth.isAuthenticated() == true){
     
-    return <Navigate to={{
-      pathname: "/main_feed",
-      state : {
-
-        user_name: localStorage.getItem('user_name'),
-        number_of_threads: localStorage.getItem('number_of_threads')
-
-      }
-    }} />
+    return <Navigate 
+    to={{pathname: "/main_feed"}}
+    state={{existing_threads: currThreads}}
+    />
   }
 
   return (

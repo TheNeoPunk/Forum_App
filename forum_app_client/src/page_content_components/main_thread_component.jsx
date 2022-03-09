@@ -1,6 +1,6 @@
 //React imports
-import { Link, BrowserRouter } from 'react-router-dom';  //import for page navigation
-import React, { Component,  useState } from 'react';
+import { Link, BrowserRouter, useLocation } from 'react-router-dom';  //import for page navigation
+import React, { Component,  useState, useEffect } from 'react';
 import Axios from 'axios';
 import '../App.scss';
 import './page_content_css/main_feed.scss';
@@ -14,6 +14,9 @@ import NavBar from './sub_components/navigation_component';
 import Filter_Content_Component from './sub_components/filter_content_component';
 
 function Main_Feed_Component () {   
+
+  const { state } = useLocation();
+  console.log(state);
 
   return(
     <div>
@@ -56,37 +59,37 @@ function Main_Feed_Component () {
                               <div> Number of Likes </div>
                               <div> <FontAwesomeIcon icon={faAngleDown} /></div>
                           </div>
-                          <div class="col-11">
-                            <div class="container feed-header">
-                              <div class="row">
-                                <div class="col-sm feed-title">
+                          <div className="col-11">
+                            <div className="container feed-header">
+                              <div className="row">
+                                <div className="col-sm feed-title">
                                   Title
                                 </div>
-                                <div class="col-10">
+                                <div className="col-10">
                                   Space
                                 </div>
-                                <div class="col-sm">
+                                <div className="col-sm">
                                   Time 
                                 </div>
                               </div>
                             </div>
-                            <div class="container">
-                              <div class="row">
-                                <div class="col">
+                            <div className="container">
+                              <div className="row">
+                                <div className="col">
                                  Author
                                 </div>
                               </div>
                             </div>
-                            <div class="container content-container">
-                              <div class="row">
-                                <div class="col">
+                            <div className="container content-container">
+                              <div className="row">
+                                <div className="col">
                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                 </div>
                               </div>
                             </div>
-                            <div class="container comment-container">
-                              <div class="row">
-                                <div class="col comment-column">
+                            <div className="container comment-container">
+                              <div className="row">
+                                <div className="col comment-column">
                                   <div>Comments</div>
                                   <div> <FontAwesomeIcon icon={faEllipsisH} /></div>
                                 </div>
