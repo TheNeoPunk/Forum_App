@@ -18,14 +18,61 @@ function Main_Feed_Component () {
   const { state } = useLocation();
   console.log(state.existing_threads);
 
-  function RenderFeedItem(existing_thread_items){
+  function RenderFeedItem(props){
 
     var total_thread_items = [];
-
-    for(var i = 0; i <= existing_thread_items.length; i++){
+    console.log(props.loadThread[1]);
+    for(var i = 0; i < props.loadThread[1].length; i++){
 
       total_thread_items.push(
-
+        <div className="feed-item">
+                      <div className="container ">
+                        <div className="row">
+                          <div className="col-1 like-dislike-container">
+                              <div> <FontAwesomeIcon icon={faAngleUp} /></div>
+                              <div> {props.loadThread[1][i].like_numbers} </div>
+                              <div> <FontAwesomeIcon icon={faAngleDown} /></div>
+                          </div>
+                          <div className="col-11">
+                            <div className="container feed-header">
+                              <div className="row">
+                                <div className="col-sm feed-title">
+                                {props.loadThread[1][i].thread_title}
+                                </div>
+                                <div className="col-7">
+                                  Space
+                                </div>
+                                <div className="col">
+                                {props.loadThread[1][i].thread_date}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="container">
+                              <div className="row">
+                                <div className="col-sm">
+                                {props.loadThread[1][i].thread_owner}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="container content-container">
+                              <div className="row">
+                                <div className="col">
+                                {props.loadThread[1][i].thread_content}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="container comment-container">
+                              <div className="row">
+                                <div className="col comment-column">
+                                  <div>Comments</div>
+                                  <div> <FontAwesomeIcon icon={faEllipsisH} /></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
       );
 
     }
@@ -66,55 +113,8 @@ function Main_Feed_Component () {
                 <Filter_Content_Component />
                 {/********************************************** */}
                 <div className="row">
-                  <div className="col flex-center feed-container">
-                    <div className="feed-item">
-                      <div className="container ">
-                        <div className="row">
-                          <div className="col-1 like-dislike-container">
-                              <div> <FontAwesomeIcon icon={faAngleUp} /></div>
-                              <div> Number of Likes </div>
-                              <div> <FontAwesomeIcon icon={faAngleDown} /></div>
-                          </div>
-                          <div className="col-11">
-                            <div className="container feed-header">
-                              <div className="row">
-                                <div className="col-sm feed-title">
-                                  Title
-                                </div>
-                                <div className="col-10">
-                                  Space
-                                </div>
-                                <div className="col-sm">
-                                  Time 
-                                </div>
-                              </div>
-                            </div>
-                            <div className="container">
-                              <div className="row">
-                                <div className="col">
-                                 Author
-                                </div>
-                              </div>
-                            </div>
-                            <div className="container content-container">
-                              <div className="row">
-                                <div className="col">
-                                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </div>
-                              </div>
-                            </div>
-                            <div className="container comment-container">
-                              <div className="row">
-                                <div className="col comment-column">
-                                  <div>Comments</div>
-                                  <div> <FontAwesomeIcon icon={faEllipsisH} /></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="col flex-center feed-container flex-vertical">
+                    <RenderFeedItem loadThread={state.existing_threads}/>
                   </div>
                 </div>
               </div>
