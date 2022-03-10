@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { Link, BrowserRouter, Navigate } from 'react-router-dom';  //import for page navigation
+import { Link, BrowserRouter, Navigate, useLocation } from 'react-router-dom';  //import for page navigation
 
 //Component imports
 import NavBar from './sub_components/navigation_component';
@@ -24,7 +24,8 @@ function Create_Thread_Component(){
 
   let [authPost, setPost] = useState(false);
 
-  
+  const { state } = useLocation();
+  //console.log(state.existing_threads);
 
   function handleThreadInput(event){
     event.preventDefault();
@@ -57,9 +58,9 @@ function Create_Thread_Component(){
   console.log(authPost);
 
   if(authPost == true){
-    return <Navigate to={{
-      pathname: "/postThread"
-    }} />
+    return <Navigate 
+              to={{pathname: "/postThread"}} 
+            />
   }
 
   return (

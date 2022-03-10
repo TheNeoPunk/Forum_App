@@ -1,6 +1,6 @@
 //React imports
 import { Link, BrowserRouter, useLocation } from 'react-router-dom';  //import for page navigation
-import React, { Component,  useState, useEffect } from 'react';
+import React, { Component,  useState, useEffect, useRef } from 'react';
 import Axios from 'axios';
 import '../App.scss';
 import './page_content_css/main_feed.scss';
@@ -15,13 +15,13 @@ import Filter_Content_Component from './sub_components/filter_content_component'
 
 function Main_Feed_Component () {   
 
-  const { state } = useLocation();
+  const { state } = useLocation(); 
   console.log(state.existing_threads);
 
   function RenderFeedItem(props){
 
     var total_thread_items = [];
-    console.log(props.loadThread[1]);
+    //console.log(props.loadThread[1]);
     for(var i = 0; i < props.loadThread[1].length; i++){
 
       total_thread_items.push(
@@ -36,7 +36,7 @@ function Main_Feed_Component () {
                           <div className="col-11">
                             <div className="container feed-header">
                               <div className="row">
-                                <div className="col-sm feed-title">
+                                <div className="col-2 feed-title">
                                 {props.loadThread[1][i].thread_title}
                                 </div>
                                 <div className="col-7">
@@ -99,7 +99,7 @@ function Main_Feed_Component () {
             <div className="col side-nav">
               <div className="flex-vertical flex-center">
                 <div className='create-thread-button-container'>
-                  <Link to="/createThread"><button className="create-thread-button">Create a Thread</button></Link>
+                  <Link to="/createThread" state={{existing_threads: state.existing_threads}}><button className="create-thread-button">Create a Thread</button></Link>
                 </div>
                 <div className="side-nav-item flex-center">Item</div>
                 <div className="side-nav-item flex-center">Item</div>
