@@ -55,11 +55,10 @@ function Create_Thread_Component(){
     });
   }
 
-  console.log(authPost);
-
   if(authPost == true){
     return <Navigate 
               to={{pathname: "/postThread"}} 
+              state={{existing_threads: state.existing_threads}}
             />
   }
 

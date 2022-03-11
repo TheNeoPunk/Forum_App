@@ -18,11 +18,44 @@ function Main_Feed_Component () {
   const { state } = useLocation(); 
   console.log(state.existing_threads);
 
+  let mounted = useRef(false);
+
+  let [currThreads, setThreads] = useState([]);
+
+  function updateThreadFeed(){
+
+    Axios.get('http://localhost:3001/grabAllThreads').then(function(response) {  
+      if(mounted && response.status == 200){
+        const thread_res = response.data
+        console.log(response.data);
+        setThreads([...currThreads, thread_res]);
+      }else{
+        console.log('not mounted')
+      }
+    }); 
+    
+  }
+
+  useEffect(() => {
+
+    mounted.current = true;
+    //console.log('mounted');
+
+    updateThreadFeed();
+
+  }, []);
+
+  useEffect(() => {
+
+    console.log(currThreads);
+
+  }, [currThreads])
+
   function RenderFeedItem(props){
 
     var total_thread_items = [];
     //console.log(props.loadThread[1]);
-    for(var i = 0; i < props.loadThread[1].length; i++){
+    for(var i = 0; i < props.loadThread[0].length; i++){
 
       total_thread_items.push(
         <div className="feed-item">
@@ -30,34 +63,34 @@ function Main_Feed_Component () {
                         <div className="row">
                           <div className="col-1 like-dislike-container">
                               <div> <FontAwesomeIcon icon={faAngleUp} /></div>
-                              <div> {props.loadThread[1][i].like_numbers} </div>
+                              <div> {props.loadThread[0][i].like_numbers} </div>
                               <div> <FontAwesomeIcon icon={faAngleDown} /></div>
                           </div>
                           <div className="col-11">
                             <div className="container feed-header">
                               <div className="row">
                                 <div className="col-2 feed-title">
-                                {props.loadThread[1][i].thread_title}
+                                {props.loadThread[0][i].thread_title}
                                 </div>
                                 <div className="col-7">
                                   Space
                                 </div>
                                 <div className="col">
-                                {props.loadThread[1][i].thread_date}
+                                {props.loadThread[0][i].thread_date}
                                 </div>
                               </div>
                             </div>
                             <div className="container">
                               <div className="row">
                                 <div className="col-sm">
-                                {props.loadThread[1][i].thread_owner}
+                                {props.loadThread[0][i].thread_owner}
                                 </div>
                               </div>
                             </div>
                             <div className="container content-container">
                               <div className="row">
                                 <div className="col">
-                                {props.loadThread[1][i].thread_content}
+                                {props.loadThread[0][i].thread_content}
                                 </div>
                               </div>
                             </div>
@@ -99,7 +132,7 @@ function Main_Feed_Component () {
             <div className="col side-nav">
               <div className="flex-vertical flex-center">
                 <div className='create-thread-button-container'>
-                  <Link to="/createThread" state={{existing_threads: state.existing_threads}}><button className="create-thread-button">Create a Thread</button></Link>
+                  <Link to="/createThread" state={{existing_threads: currThreads}}><button className="create-thread-button">Create a Thread</button></Link>
                 </div>
                 <div className="side-nav-item flex-center">Item</div>
                 <div className="side-nav-item flex-center">Item</div>

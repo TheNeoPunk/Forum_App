@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect, useRef } from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';  //import for page navigation
 import Axios from 'axios';
 
@@ -17,21 +17,42 @@ function NavBar() {
 
   let [currThreads, setThreads] = useState([]);
 
-  function refreshFeed(){
+  let mounted = useRef(false);
+
+  function updateThreadFeed(){
+
     Axios.get('http://localhost:3001/grabAllThreads').then(function(response) {  
-      console.log(response.data)
-      setThreads([currThreads, response.data]);
-      console.log(currThreads);
-    });
+      if(mounted && response.status == 200){
+        const thread_res = response.data;
+        setThreads([...currThreads, thread_res]);
+      }else{
+        console.log('not mounted')
+      }
+    }); 
     
   }
+
+  useEffect(() => {
+
+    mounted.current = true;
+    //console.log('mounted');
+
+    updateThreadFeed();
+
+  }, []);
+
+  useEffect(() => {
+
+    console.log(currThreads);
+
+  }, [currThreads])
 
   return (
       <div className="nav-bar">
           <div className="container-fluid">
             <div className="row">
               <div className="col nav-item">
-                <Link className="nav-link" to="/main_feed" onClick={refreshFeed} state={{existing_threads: state.existing_threads}} >The Forum</Link>
+                <Link className="nav-link" to="/main_feed" state={{existing_threads: currThreads}} >The Forum</Link>
               </div>
              
               <div className="col-10 nav-item nav-search">
