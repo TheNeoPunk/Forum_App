@@ -35,7 +35,6 @@ function NavBar() {
   useEffect(() => {
 
     mounted.current = true;
-    //console.log('mounted');
 
     updateThreadFeed();
 

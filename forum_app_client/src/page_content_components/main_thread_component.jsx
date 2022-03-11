@@ -16,40 +16,9 @@ import Filter_Content_Component from './sub_components/filter_content_component'
 function Main_Feed_Component () {   
 
   const { state } = useLocation(); 
-  console.log(state.existing_threads);
-
-  let mounted = useRef(false);
+  //console.log(state.existing_threads);
 
   let [currThreads, setThreads] = useState([]);
-
-  function updateThreadFeed(){
-
-    Axios.get('http://localhost:3001/grabAllThreads').then(function(response) {  
-      if(mounted && response.status == 200){
-        const thread_res = response.data
-        console.log(response.data);
-        setThreads([...currThreads, thread_res]);
-      }else{
-        console.log('not mounted')
-      }
-    }); 
-    
-  }
-
-  useEffect(() => {
-
-    mounted.current = true;
-    //console.log('mounted');
-
-    updateThreadFeed();
-
-  }, []);
-
-  useEffect(() => {
-
-    console.log(currThreads);
-
-  }, [currThreads])
 
   function RenderFeedItem(props){
 

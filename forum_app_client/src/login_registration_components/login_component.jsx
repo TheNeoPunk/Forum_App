@@ -2,7 +2,7 @@ import { Link, BrowserRouter, Navigate, useLocation } from 'react-router-dom';  
 import Logo from '../sub_components/Logo_Title';
 import Axios from 'axios';
 import Auth from './login_js/isAuthenticated';
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect, useRef } from 'react';
 
 //scss imports
 import './login_register_css/login_component.scss';
@@ -19,6 +19,7 @@ function Login_Component(){
   let [authToRedir, setAuth] = useState(false);
 
   let [currThreads, setThreads] = useState([]);
+  let mounted = useRef(false);
 
   //Grabs multiple input values into one function
   function handleLoginChange(event){
@@ -61,14 +62,36 @@ function Login_Component(){
       }
 
     });
-
-    Axios.get('http://localhost:3001/grabAllThreads').then(function(response) {  
-      console.log(response.data);
-      setThreads([currThreads, response.data]);
-     
-    });
     
   }
+
+  function updateThreadFeed(){
+
+    Axios.get('http://localhost:3001/grabAllThreads').then(function(response) {  
+      if(mounted && response.status == 200){
+        const thread_res = response.data
+        setThreads([...currThreads, thread_res]);
+      }else{
+        console.log('not mounted')
+      }
+    }); 
+    
+  }
+
+  useEffect(() => {
+
+    mounted.current = true;
+    //console.log('mounted');
+
+    updateThreadFeed();
+
+  }, []);
+
+  useEffect(() => {
+
+    console.log(currThreads);
+
+  }, [currThreads])
 
   if(Auth.isAuthenticated() == true){
     
