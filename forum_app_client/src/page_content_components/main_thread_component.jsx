@@ -59,53 +59,53 @@ function Main_Feed_Component () {
 
       total_thread_items.push(
         <div className="feed-item">
-                      <div className="container ">
-                        <div className="row">
-                          <div className="col-1 like-dislike-container">
-                              <div> <FontAwesomeIcon icon={faAngleUp} /></div>
-                              <div> {props.loadThread[0][i].like_numbers} </div>
-                              <div> <FontAwesomeIcon icon={faAngleDown} /></div>
-                          </div>
-                          <div className="col-11">
-                            <div className="container feed-header">
-                              <div className="row">
-                                <div className="col-2 feed-title">
-                                {props.loadThread[0][i].thread_title}
-                                </div>
-                                <div className="col-7">
-                                  Space
-                                </div>
-                                <div className="col">
-                                {props.loadThread[0][i].thread_date}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="container">
-                              <div className="row">
-                                <div className="col-sm">
-                                {props.loadThread[0][i].thread_owner}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="container content-container">
-                              <div className="row">
-                                <div className="col">
-                                {props.loadThread[0][i].thread_content}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="container comment-container">
-                              <div className="row">
-                                <div className="col comment-column">
-                                  <div>Comments</div>
-                                  <div> <FontAwesomeIcon icon={faEllipsisH} /></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+          <div className="container ">
+            <div className="row">
+              <div className="col-1 like-dislike-container">
+                  <div> <FontAwesomeIcon icon={faAngleUp} /></div>
+                  <div> {props.loadThread[0][i].like_numbers} </div>
+                  <div> <FontAwesomeIcon icon={faAngleDown} /></div>
+              </div>
+              <div className="col-11">
+                <div className="container feed-header">
+                  <div className="row">
+                    <div className="col-2 feed-title">
+                    {props.loadThread[0][i].thread_title}
                     </div>
+                    <div className="col-7">
+                      Space
+                    </div>
+                    <div className="col">
+                    {props.loadThread[0][i].thread_date}
+                    </div>
+                  </div>
+                </div>
+                <div className="container">
+                  <div className="row">
+                    <div className="col-sm">
+                    {props.loadThread[0][i].thread_owner}
+                    </div>
+                  </div>
+                </div>
+                <div className="container content-container">
+                  <div className="row">
+                    <div className="col">
+                    {props.loadThread[0][i].thread_content}
+                    </div>
+                  </div>
+                </div>
+                <div className="container comment-container">
+                  <div className="row">
+                    <div className="col comment-column">
+                      <div>Comments</div>
+                      <div> <FontAwesomeIcon icon={faEllipsisH} /></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       );
 
     }
