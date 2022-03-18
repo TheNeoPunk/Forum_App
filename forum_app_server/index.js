@@ -12,7 +12,7 @@ const db = mysql.createPool({
     //Pool access credentials
     host: 'localhost',
     user: 'root',
-    password: '*********',
+    password: '***********',
     database: 'forum_app_db',
     multipleStatements: 'true'
 
@@ -123,10 +123,10 @@ app.get('/grabAllThreads', (req, res) => {
 
     const threadQuerySQL = "SELECT * FROM forum_app_db.user_threads;";
 
-
     db.query(
         threadQuerySQL,
         (err, result) => {
+            
             if(err){
                 console.log(err);
             }else{
@@ -134,8 +134,32 @@ app.get('/grabAllThreads', (req, res) => {
             }
             res.send(result);
             console.log('this is responding');
+        
         }
     );
+});
+
+app.delete('/deleteCurrThread/:id', (req, res) => {
+
+    console.log(post_id)
+    //console.log(post_id , 'This post had been deleted');
+    const delThreadQuery = "DELETE FROM forum_app_db.user_threads WHERE id = ? ";
+
+    db.query(
+        delThreadQuery,
+        [req.params.id],
+        (err, result) => {
+
+            if(err){
+                res.send(err);
+            }else{
+                res.send(result)
+            }
+            console.log(result)
+
+        }
+    )
+
 });
 
 app.get('/', (req, res) => {

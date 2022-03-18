@@ -1,5 +1,5 @@
 //React imports
-import { Link, BrowserRouter, useLocation } from 'react-router-dom';  //import for page navigation
+import { Link, BrowserRouter, Navigate,  useLocation } from 'react-router-dom';  //import for page navigation
 import React, { Component,  useState, useEffect, useRef } from 'react';
 import Axios from 'axios';
 import '../App.scss';
@@ -20,6 +20,8 @@ function Main_Feed_Component () {
 
   let [currThreads, setThreads] = useState([]);
 
+  let [authGoToPost, setGoToPost] = useState(false);
+
   function RenderFeedItem(props){
 
     var total_thread_items = [];
@@ -27,54 +29,69 @@ function Main_Feed_Component () {
     for(var i = 0; i < props.loadThread[0].length; i++){
 
       total_thread_items.push(
-        <div className="feed-item">
-          <div className="container ">
-            <div className="row">
-              <div className="col-1 like-dislike-container">
-                  <div> <FontAwesomeIcon icon={faAngleUp} /></div>
-                  <div> {props.loadThread[0][i].like_numbers} </div>
-                  <div> <FontAwesomeIcon icon={faAngleDown} /></div>
-              </div>
-              <div className="col-11">
-                <div className="container feed-header">
-                  <div className="row">
-                    <div className="col-2 feed-title">
-                    {props.loadThread[0][i].thread_title}
-                    </div>
-                    <div className="col-7">
-                      Space
-                    </div>
-                    <div className="col">
-                    {props.loadThread[0][i].thread_date}
+        
+          <div className="feed-item">
+            <div className="container ">
+              <div className="row">
+                <div className="col-1 like-dislike-container">
+                    <div> <FontAwesomeIcon icon={faAngleUp} /></div>
+                    <div> {props.loadThread[0][i].like_numbers} </div>
+                    <div> <FontAwesomeIcon icon={faAngleDown} /></div>
+                </div>
+                <div className="col-11">
+                  <div className="container feed-header">
+                    <div className="row">
+                      <div className="col-2 feed-title">
+                      <Link 
+                        to="/postThread"
+                        state={{
+                          curr_thread_id: props.loadThread[0][i].id,
+                          curr_thread_likes: props.loadThread[0][i].like_numbers, 
+                          curr_thread_title: props.loadThread[0][i].thread_title, 
+                          curr_thread_date: props.loadThread[0][i].thread_date, 
+                          curr_thread_owner: props.loadThread[0][i].thread_owner, 
+                          curr_thread_content: props.loadThread[0][i].thread_content,
+                          curr_thread_comments: props.loadThread[0][i].thread_comments
+                        }}
+                      >
+                        {props.loadThread[0][i].thread_title}
+                      </Link>
+                      </div>
+                      <div className="col-7">
+                        Space
+                      </div>
+                      <div className="col">
+                      {props.loadThread[0][i].thread_date}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="container">
-                  <div className="row">
-                    <div className="col-sm">
-                    {props.loadThread[0][i].thread_owner}
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-sm">
+                      {props.loadThread[0][i].thread_owner}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="container content-container">
-                  <div className="row">
-                    <div className="col">
-                    {props.loadThread[0][i].thread_content}
+                  <div className="container content-container">
+                    <div className="row">
+                      <div className="col">
+                      {props.loadThread[0][i].thread_content}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="container comment-container">
-                  <div className="row">
-                    <div className="col comment-column">
-                      <div>Comments</div>
-                      <div> <FontAwesomeIcon icon={faEllipsisH} /></div>
+                  <div className="container comment-container">
+                    <div className="row">
+                      <div className="col comment-column">
+                        <div>Comments</div>
+                        <div> <FontAwesomeIcon icon={faEllipsisH} /></div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+    
       );
 
     }

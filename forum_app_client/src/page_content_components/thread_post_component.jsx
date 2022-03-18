@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Link, BrowserRouter, Navigate, useLocation } from 'react-router-dom';  //import for page navigation
 import Axios from 'axios';
 
@@ -17,9 +17,88 @@ import '../App.scss';
 
 function Thread_Post_Component(){
 
+  const { state } = useLocation();
+  console.log( state );
+
+  let [thread_comments, setComments] = useState([]);
+  let [showEditWidget, setEditWidget] = useState(false);
+
+   //Looks for comments and renders accordingly
+  function renderCommentSection(comment_array){
+  
+    if(comment_array.length == 0){
+      
+
+
+    }else{
+
+      
+     
+    }
+    
+  }
+
+
+  //Displays options to delete or edit post of user
+  function ThreadOptions(props){
+
+    //API request to delete a post query
+    function deletePost(post_id){
+      console.log(state.curr_thread_id);
+      const curr_thread_id = state.curr_thread_id;
+     
+      Axios.delete('http://localhost:3001/deleteCurrThread/' + state.curr_thread_id, {
+      
+
+    
+      }).then(function(err, res){
+
+        console.log(res);
+
+      });
+    }
+
+    function editPost(){
+      
+    }  
+
+    let enableThreadOption = props.toggleThreadOptions;
+
+    if(enableThreadOption == false){
+
+      return(
+
+        <div></div>
+      );
+
+    }else if(enableThreadOption == true){
+
+      return(
+        
+        <div className="">
+
+          <div onClick={()=>{
+          
+           setEditWidget(false)
+          
+          }}>mCthingy</div>
+          <div onClick={editPost}>Edit</div>
+          <div onClick={deletePost}>Delete</div>
+
+        </div>
+        
+      );
+
+    }
+    
+  }
+
   return(
       <React.Fragment>
           <NavBar />
+
+          {/* ------ Thread Post--------- */}
+
           <div className="thread-post-container">
               <div className="container">
                 <div className="row">
@@ -32,41 +111,44 @@ function Thread_Post_Component(){
                             <div className="row">
                               <div className="col-1 like-dislike-container">
                                   <div> <FontAwesomeIcon icon={faAngleUp} /></div>
-                                  <div> Number of Likes </div>
+                                  <div> {state.curr_thread_likes} </div>
                                   <div> <FontAwesomeIcon icon={faAngleDown} /></div>
                               </div>
                               <div className="col-11">
                                 <div className="container feed-header">
                                   <div className="row">
-                                    <div className="col-sm feed-title">
-                                      Title
+                                    <div className="col-1 feed-title">
+                                      {state.curr_thread_title}
                                     </div>
-                                    <div className="col-10">
+                                    <div className="col-7">
                                       Space
                                     </div>
                                     <div className="col-sm">
-                                      Time 
+                                      {state.curr_thread_date}
                                     </div>
                                   </div>
                                 </div>
                                 <div className="container">
                                   <div className="row">
                                     <div className="col">
-                                     Author
+                                      {state.curr_thread_owner}
                                     </div>
                                   </div>
                                 </div>
                                 <div className="container content-container">
                                   <div className="row">
                                     <div className="col">
-                                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                      {state.curr_thread_content}
                                     </div>
                                   </div>
                                 </div>
                                 <div className="container comment-container">
                                   <div className="row">
                                     <div className="col comment-column">
-                                      <div> <FontAwesomeIcon icon={faEllipsisH} /></div>
+                                      <div> <FontAwesomeIcon onClick={()=>{
+                                        setEditWidget(true);
+                                      }} icon={faEllipsisH} /></div>
+                                      <div> <ThreadOptions toggleThreadOptions={showEditWidget} thread_id={state.curr_thread_id}/></div>
                                     </div>
                                   </div>
                                 </div>
@@ -74,6 +156,8 @@ function Thread_Post_Component(){
                             </div>
                           </div>
                       </div>
+
+                      {/*-----COMMENT SECTION BELOW ---------*/ }
                       <div className="container comment-button-container">
                         <div className="row">
                           <div className="col">
@@ -85,7 +169,7 @@ function Thread_Post_Component(){
                             <div className="container">
                               <div className="row">
                                 <div><Filter_Content_Component /></div>
-                                <Comment_Item_Component />
+                                <Comment_Item_Component threadComments={{thread_comments}}/>
                               </div>
                             </div>
                           </div>

@@ -94,7 +94,6 @@ function Login_Component(){
   }, [currThreads])
 
   if(Auth.isAuthenticated() == true){
-    
     return <Navigate 
     to={{pathname: "/main_feed"}}
     state={{existing_threads: currThreads}}

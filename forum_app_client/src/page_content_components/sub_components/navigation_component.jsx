@@ -19,6 +19,7 @@ function NavBar() {
 
   let mounted = useRef(false);
 
+  // API request for all thread feeds
   function updateThreadFeed(){
 
     Axios.get('http://localhost:3001/grabAllThreads').then(function(response) {  
@@ -32,6 +33,7 @@ function NavBar() {
     
   }
 
+  //When web page mounts
   useEffect(() => {
 
     mounted.current = true;
