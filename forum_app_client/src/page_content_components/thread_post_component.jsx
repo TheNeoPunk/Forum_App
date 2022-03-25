@@ -6,6 +6,7 @@ import Axios from 'axios';
 import NavBar from './sub_components/navigation_component';
 import Filter_Content_Component from './sub_components/filter_content_component';
 import Comment_Item_Component from './sub_components/comment_item_component';
+import Edit_Post_Component from './sub_components/edit_post_component';
 
 //Font Awesome imports
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -29,10 +30,8 @@ function Thread_Post_Component(){
     if(comment_array.length == 0){
       
 
-
     }else{
 
-      
      
     }
     
@@ -42,27 +41,44 @@ function Thread_Post_Component(){
   //Displays options to delete or edit post of user
   function ThreadOptions(props){
 
-    //API request to delete a post query
-    function deletePost(post_id){
-      console.log(state.curr_thread_id);
-      const curr_thread_id = state.curr_thread_id;
-     
-      Axios.delete('http://localhost:3001/deleteCurrThread/' + state.curr_thread_id, {
-      
+    let enableThreadOption = props.toggleThreadOptions;
+    let [enableEditModal, setEditModal] = useState(false);
 
-    
-      }).then(function(err, res){
+    //API request to delete a post query
+    function deletePost(){
+      console.log(state.curr_thread_id);
+      Axios.delete('http://localhost:3001/deleteCurrThread/' + state.curr_thread_id).then(function(err, res){
 
         console.log(res);
 
       });
     }
 
-    function editPost(){
+    function enableEditPost(){
+      
+      setEditModal(true);
+      console.log(enableEditModal);
       
     }  
 
-    let enableThreadOption = props.toggleThreadOptions;
+    function disableEditPost(){
+      
+      setEditModal(false);
+
+    }
+
+    function EditModal(){
+
+      if(enableEditModal == true){
+
+        return(<Edit_Post_Component showModal={enableEditModal}/>);
+
+      }else if(enableEditModal == false){
+
+        return(<div className="d-none">No world</div>);
+      }
+
+    }
 
     if(enableThreadOption == false){
 
@@ -76,13 +92,14 @@ function Thread_Post_Component(){
       return(
         
         <div className="">
-
-          <div onClick={()=>{
+          
+          <EditModal />
+          <div onClick={()=>{ 
           
            setEditWidget(false)
           
           }}>mCthingy</div>
-          <div onClick={editPost}>Edit</div>
+          <div onClick={enableEditPost}>Edit</div>
           <div onClick={deletePost}>Delete</div>
 
         </div>

@@ -141,7 +141,7 @@ app.get('/grabAllThreads', (req, res) => {
 
 app.delete('/deleteCurrThread/:id', (req, res) => {
 
-    console.log(post_id)
+    console.log(req.params.id)
     //console.log(post_id , 'This post had been deleted');
     const delThreadQuery = "DELETE FROM forum_app_db.user_threads WHERE id = ? ";
 
@@ -161,6 +161,28 @@ app.delete('/deleteCurrThread/:id', (req, res) => {
     )
 
 });
+
+app.get('/getLatestThread', (req, res) => {
+
+    const curr_thread_title = req.query.latest_thread_name;
+    console.log("Current logged user", req.query.curr_user);
+    const contact_SQLCheck = "SELECT DISTINCT * FROM forum_app_db.user_threads WHERE thread_title = ?"
+
+    db.query(
+        contact_SQLCheck,
+        [curr_thread_title],
+        (err, result) => {
+            if(err){
+                console.log(err);
+            }else{
+                console.log(result);
+            }
+
+            res.send(result);
+
+        }
+    )
+})
 
 app.get('/', (req, res) => {
 

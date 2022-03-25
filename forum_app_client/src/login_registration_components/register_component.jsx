@@ -89,12 +89,13 @@ function Register_Component(){
               </div>
               <div><Link className='link' to="/login">Already have one? Login</Link></div>
             </div>
+            {/*-------REGISTER FORM ----------- */}
             <form className="register-form" onSubmit={redirecToForum}>
               <div>
                 {/* values become the state declared values in useState constructor */}
                   <input className="user" name="username" type="text" placeholder='user' value={userValues.username} onChange={handleChange}/><br />
                   <input className="email" name="email" type="email" placeholder='email' value={userValues.email} onChange={handleChange}/><br />
-                  <input className="password" name="password" type="text" onChange={userValues.password} value={userValues.password} onChange={handleChange} placeholder='password'/><br />
+                  <input className="password" name="password" type="text" placeholder='password' value={userValues.password} onChange={handleChange}/><br />
                   <input className="password-confirm" name="confirmPassword" placeholder='confirm password' value={userValues.confirmPassword} onChange={handleChange} type="text"/>
               </div>
               <div>

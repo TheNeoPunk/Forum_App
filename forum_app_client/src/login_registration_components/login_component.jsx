@@ -101,6 +101,7 @@ function Login_Component(){
   }
 
   return (
+
       <div className="App">
       <div className="flex-container flex-center flex-vertical">
         <div className="col-10 no-match-pass-div rounded-3">
@@ -113,6 +114,7 @@ function Login_Component(){
           </div>
           <div><Link className='link' to="/register">Don't have an account? Make one</Link></div>
         </div>
+        {/* ---------LOGIN FORM--------- */}
         <form className="register-form" onSubmit={redirecToForum}>
           <div>
             <input className="email" type="email" name="email" placeholder='email' value={userLoginValues.email} onChange={ handleLoginChange}/><br />

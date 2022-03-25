@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import Axios from 'axios';
 import { Link, BrowserRouter, Navigate, useLocation } from 'react-router-dom';  //import for page navigation
 
@@ -15,10 +15,17 @@ import AuthPost from './page_content_js/post_render_auth';
 
 function Create_Thread_Component(){
 
+  //User input for new thread for POST request
   let [threadContent, setThread] = useState(
     {
       title: '',
       content: ''
+    }
+  );
+
+  //Post info after creation AFTER GET request
+  let [postJustCreated, setNewPost] = useState(
+    {
     }
   );
 
@@ -34,10 +41,20 @@ function Create_Thread_Component(){
       ...threadContent,
       [event.target.name]: inputValue
     });
+    console.log(threadContent.title);
   }
 
+  useEffect(()=>{
+
+   
+
+  }, []);
+
   function submitThread(){
+
     const {title, content} = threadContent;
+
+    //Axios creates the POST request
     Axios.post('http://localhost:3001/createThread', {
 
       thread_title: title,
@@ -49,16 +66,47 @@ function Create_Thread_Component(){
         console.log(err);
       }else{
         console.log(res);
+      }
+
+      //Grab thread info just created and send to the singular post page for view
+      Axios.get('http://localhost:3001/getLatestThread', {
+        params: {
+          latest_thread_name: threadContent.title
+        }
+      }).then((response) => {
+
+        //console.log(response.data[0].id);
+        setNewPost({...postJustCreated, 
+          id: response.data[0].id,
+          thread_owner: response.data[0].thread_owner,
+          thread_content: response.data[0].thread_content,
+          thread_title: response.data[0].thread_title,
+          thread_comments: response.data[0].thread_comments,
+          like_numbers: response.data[0].like_numbers,
+          thread_date: response.data[0].thread_date
+        });
+  
         AuthPost.post();
         setPost(AuthPost.isPostAuthorized());
-      }
+
+      });
     });
   }
 
   if(authPost == true){
+
+   
     return <Navigate 
               to={{pathname: "/postThread"}} 
-              state={{existing_threads: state.existing_threads}}
+              state={{
+                curr_thread_id: postJustCreated.id,
+                curr_thread_likes: postJustCreated.like_numbers, 
+                curr_thread_title: postJustCreated.thread_title, 
+                curr_thread_date: postJustCreated.thread_date, 
+                curr_thread_owner: postJustCreated.thread_owner, 
+                curr_thread_content: postJustCreated.thread_content,
+                curr_thread_comments: postJustCreated.thread_comments
+              }}
             />
   }
 
