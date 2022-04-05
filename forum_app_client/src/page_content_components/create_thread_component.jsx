@@ -21,7 +21,7 @@ function Create_Thread_Component(){
       title: '',
       content: ''
     }
-  );
+  ); 
 
   //Post info after creation AFTER GET request
   let [postJustCreated, setNewPost] = useState(
@@ -130,7 +130,7 @@ function Create_Thread_Component(){
                         <input type="text" name="title" onChange={handleThreadInput}/>
                       </div>
                       <div className='thread-item'>
-                        <p>Title</p>
+                        <p>Content</p>
                         <textarea type="text" name="content" onChange={handleThreadInput}/>
                       </div>
                       <div className='thread-item '>

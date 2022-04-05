@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Link, BrowserRouter, Navigate, useLocation } from 'react-router-dom';  //import for page navigation
 import Axios from 'axios';
 
@@ -18,7 +18,7 @@ import '../App.scss';
 
 function Thread_Post_Component(){
 
-  const { state } = useLocation();
+  let { state } = useLocation();
   console.log( state );
 
   let [thread_comments, setComments] = useState([]);
@@ -37,6 +37,11 @@ function Thread_Post_Component(){
     
   }
 
+  useEffect(() => {
+
+    console.log(state, 'latest post data')
+
+  });
 
   //Displays options to delete or edit post of user
   function ThreadOptions(props){
@@ -48,9 +53,7 @@ function Thread_Post_Component(){
     function deletePost(){
       console.log(state.curr_thread_id);
       Axios.delete('http://localhost:3001/deleteCurrThread/' + state.curr_thread_id).then(function(err, res){
-
         console.log(res);
-
       });
     }
 
@@ -62,7 +65,7 @@ function Thread_Post_Component(){
     }  
 
     function disableEditPost(){
-      
+
       setEditModal(false);
 
     }
@@ -71,7 +74,7 @@ function Thread_Post_Component(){
 
       if(enableEditModal == true){
 
-        return(<Edit_Post_Component showModal={enableEditModal}/>);
+        return(<Edit_Post_Component currThreadData={[state.curr_thread_id, state.curr_thread_likes,state.curr_thread_title, state.curr_thread_date, state.curr_thread_owner, state.curr_thread_content, state.curr_thread_comments]} closeModal={disableEditPost}/>);
 
       }else if(enableEditModal == false){
 
@@ -115,7 +118,6 @@ function Thread_Post_Component(){
           <NavBar />
 
           {/* ------ Thread Post--------- */}
-
           <div className="thread-post-container">
               <div className="container">
                 <div className="row">

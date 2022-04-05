@@ -12,7 +12,7 @@ const db = mysql.createPool({
     //Pool access credentials
     host: 'localhost',
     user: 'root',
-    password: '***********',
+    password: '************',
     database: 'forum_app_db',
     multipleStatements: 'true'
 
@@ -28,7 +28,7 @@ app.post('/register', async (req, res) => {
     const user = req.body.user_name;
     const email = req.body.user_email;
     const user_pass = req.body.user_pass;
-    const user_confirm = req.body.user_confirm;
+    //const user_confirm = req.body.user_confirm;
 
     //Encrypt password
     const scramblePassword = encrypt(user_pass);
@@ -183,6 +183,29 @@ app.get('/getLatestThread', (req, res) => {
         }
     )
 })
+
+app.post('/updateCurrPost', (req, res) => {
+    console.log('updating post')
+    const curr_id = req.body.currId;
+    const curr_Title = req.body.currTitle;
+    const curr_Content = req.body.currContent;
+
+    const updatePostSQLQuery = "UPDATE forum_app_db.user_threads SET thread_title = ?, thread_content = ? WHERE id = ?";
+
+    db.query(
+        updatePostSQLQuery,
+        [curr_Title, curr_Content, curr_id],
+        (err, result) => {
+            if(err){
+                console.log(err);
+            }else{
+                console.log(result);
+            }
+            res.send(result);
+        }
+    )
+
+});
 
 app.get('/', (req, res) => {
 

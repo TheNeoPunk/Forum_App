@@ -1,6 +1,6 @@
 //React imports
 import { Link, BrowserRouter, Redirect, Navigate } from 'react-router-dom';  //import for page navigation
-import React, { Component,  useState } from 'react';
+import React, { Component,  useState, useRef, useEffect } from 'react';
 import Axios from 'axios';
 import Auth from './login_js/isAuthenticated';
 import pass_check from './incorrect_pass';
@@ -25,6 +25,9 @@ function Register_Component(){
   let [passNoMatchMessage, setMatchMssg] = useState(null);
   let [authToRedir, setAuth] = useState(false);
 
+  let [currThreads, setThreads] = useState([]);
+  let mounted = useRef(false);
+
   //Grabs multiple input values into one function
   function handleChange(event){
     event.preventDefault();
@@ -35,6 +38,28 @@ function Register_Component(){
     });
     console.log(userValues)
   }
+
+  function updateThreadFeed(){
+
+    Axios.get('http://localhost:3001/grabAllThreads').then(function(response) {  
+      if(mounted && response.status == 200){
+        const thread_res = response.data
+        setThreads([...currThreads, thread_res]);
+      }else{
+        console.log('not mounted')
+      }
+    }); 
+    
+  }
+
+  useEffect(() => {
+
+    mounted.current = true;
+    //console.log('mounted');
+
+    updateThreadFeed();
+
+  }, []);
 
   //Registry submission method
   function redirecToForum(event) {
@@ -68,12 +93,12 @@ function Register_Component(){
   }
 
   if(Auth.isAuthenticated() == true){
-    return <Navigate to={{
-      pathname: "/main_feed",
-      state: {
-       // user_name: auth_email
-      }
-    }} />
+    return <Navigate 
+      to={{
+        pathname: "/main_feed"
+      }}
+      state={{existing_threads: currThreads}} 
+    />
   }
 
   return (

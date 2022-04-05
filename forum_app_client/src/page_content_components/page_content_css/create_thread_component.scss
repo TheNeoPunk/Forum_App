@@ -1,5 +1,15 @@
 @import "../../App.scss";
 
+@mixin create_thread_input{
+
+    width: $fullWidth;
+    border-radius: $borderRadius;
+    border: $none;
+    background-color: #79ACD8;
+    padding: 1.5em;
+
+}
+
 $borderRadius: 25px;
 
 .create-thread-row > div{
@@ -11,30 +21,21 @@ $borderRadius: 25px;
 }
 
 .thread-item{
-
     margin: 1em;
 }
 
-.thread-item > input , textarea {
+.thread-item > input  {
 
-    width: $fullWidth;
-    border-radius: $borderRadius;
-    border: $none;
-    background-color: #79ACD8;
-    padding: 1.5em;
-}
-
-.thread-item > input {
-
+    @include create_thread_input;
     height: 5vh;
-
+    
 }
 
 .thread-item > textarea {
 
     min-height: 22vh;
     max-height: 22vh;
-
+    @include create_thread_input;
 }
 
 .thread-button{
