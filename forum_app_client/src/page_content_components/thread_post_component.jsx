@@ -23,14 +23,21 @@ function Thread_Post_Component(){
 
   let [thread_comments, setComments] = useState([]);
   let [showEditWidget, setEditWidget] = useState(false);
+  let [renderPostOptions, setPostOptions] = useState(false);
 
    //Looks for comments and renders accordingly
   function renderCommentSection(comment_array){
   
     if(comment_array.length == 0){
       
+      return(
+        <div>
+          There are no comments for this post
+        </div>
+      );
 
-    }else{
+    }else if(comment_array.length > 0){
+
 
      
     }
@@ -39,7 +46,17 @@ function Thread_Post_Component(){
 
   useEffect(() => {
 
-    console.log(state, 'latest post data')
+    var loggedUser = localStorage.getItem('user_name');
+    var postOwner = state.curr_thread_owner;
+
+    //On mount, check if the logged User matches with owner of post
+    if(postOwner == loggedUser){
+      setPostOptions(true);
+      console.log(renderPostOptions);
+    }else{
+      setPostOptions(false)
+      console.log(renderPostOptions)
+    }
 
   });
 
@@ -82,6 +99,8 @@ function Thread_Post_Component(){
       }
 
     }
+
+    /*---------------------- Disables or enables render of post edit options --------------------------*/
 
     if(enableThreadOption == false){
 
@@ -164,10 +183,19 @@ function Thread_Post_Component(){
                                 <div className="container comment-container">
                                   <div className="row">
                                     <div className="col comment-column">
-                                      <div> <FontAwesomeIcon onClick={()=>{
-                                        setEditWidget(true);
-                                      }} icon={faEllipsisH} /></div>
-                                      <div> <ThreadOptions toggleThreadOptions={showEditWidget} thread_id={state.curr_thread_id}/></div>
+                                      {renderPostOptions ?  
+                                      <div>
+                                        <div> <FontAwesomeIcon onClick={()=>{
+                                          setEditWidget(true);
+                                        }} icon={faEllipsisH} /></div>
+                                        <div> 
+                                          <ThreadOptions toggleThreadOptions={showEditWidget} thread_id={state.curr_thread_id}/>
+                                        </div>
+                                      </div> : 
+                                      <div>
+                                        This is not your post
+                                      </div> }
+                                     
                                     </div>
                                   </div>
                                 </div>
